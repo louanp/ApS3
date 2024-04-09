@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4 bg-dark" >
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Retours du colis</h1>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                        <div class="mb-3">
+                            {{ form_row(form.Commentaire, {'label': 'Commentaire :', 'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <button type="submit" class="btn btn-warning">Retourner</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+            <a type="button" class="btn btn-warning" href="{{'/'}}">Retour page accueil</a>
+        </div>
+{% endblock %}

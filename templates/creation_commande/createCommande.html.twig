@@ -1,0 +1,109 @@
+{# templates/commande/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <div class="container bg-dark my-5">
+        <h1 class="text-warning">Envoyer votre colis en ligne</h1>
+
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-3 mx-5 my-3">
+                    <label for="longueur" class="form-label" name='longueur'>Longueur</label>
+                    {{ form_widget(form.longueur, {'attr': {'class': 'form-control', 'placeholder': "longueur en cm", 'name': 'longueur'}}) }}
+                    {{ form_errors(form.longueur) }}
+                </div>
+
+                <div class="col-md-3 mx-5 my-3">
+                    <label for="largeur" class="form-label" name='largeur'>Largeur</label>
+                    {{ form_widget(form.largeur, {'attr': {'class': 'form-control', 'placeholder': "largeur en cm", 'name': 'largeur'}}) }}
+                    {{ form_errors(form.largeur) }}
+                </div>
+
+                <div class="col-md-3 mx-5 my-3 ">
+                    <label for="hauteur" class="form-label" name='hauteur'>Hauteur</label>
+                    {{ form_widget(form.hauteur, {'attr': {'class': 'form-control', 'placeholder': "hauteur en cm", 'name': 'hauteur'}}) }}
+                    {{ form_errors(form.hauteur) }}
+                </div>
+
+                <div class="col-md-3 mx-5 my-3">
+                    <label for="poid" class="form-label" name='poids'>Poids</label>
+                    {{ form_widget(form.poid, {'attr': {'class': 'form-control', 'placeholder': "poids en g", 'name': 'poids'}}) }}
+                    {{ form_errors(form.poid) }}
+                </div>
+
+                <div class="col-md-3 mx-5 my-3">
+                    <label for="centreRelais" class="form-label" name='centreRelais'>Destination</label>
+                    {{ form_widget(form.centreRelais, {'attr': {'class': 'form-control', 'name': 'centreRelais', 'id': 'centreRelais'}}) }}
+                    {{ form_errors(form.centreRelais) }}
+                </div>
+                <div class="col-md-3 mx-5 my-3">
+                    {# <label class="form-label" name='centreRelaisDefault'>Centre relais </label>
+                    <input type="button" class="btn btn-warning" onclick="choixCentreParDefault()">{{ user.getLeCentreRelaisDefault() }} #}
+                </div>
+
+                <div class="col-md-3 mx-5 my-3"></div>
+                <div class="col-md-3 mx-5 my-3"></div>
+                <div class="col-md-3 ms-5 my-3 p-3">
+                    {{ form_widget(form.COMMANDER, {'attr': {'class': 'btn btn-dark', 'name': 'valider', 'data-bs-toggle': 'modal', 'data-bs-target': '#myModal'}}) }}
+                </div>
+            </div>
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            Le centre relais choisi ne contient pas de casier ayant la taille nécessaire pour votre colis.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {{ form_rest(form) }}
+            
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        .container{
+            outline: solid #000;
+            border-radius: 1em;
+            margin-top: 75px;
+            padding: 5px 15px;
+        }
+        body{
+            background-color: white;
+        }
+        .form-control{
+            background-color: #C8BFBC;
+        }
+        @media screen and (min-width: 800px) {
+            #logo{
+                margin-left: 0;
+                margin-top: 0;
+                width: 150px;
+                height : 150px;
+            }
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+function choixCentreParDefault(){
+    document.getElementById("centreRelais").disabled = true;
+}
+
+</script>
+{% endblock %}
+{# {{ form_widget(form.destination, {'attr': {'class': 'form-control', 'placeholder': "adresse du destinataire"}}) }}
+                {{ form_errors(form.destination) }} #}

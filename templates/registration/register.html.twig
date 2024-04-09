@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block header %}
+<div class="container-fluid bg-dark">
+   <div class="row">
+       <div class="col-sm-6 bg-dark">
+        <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo"/>
+       </div>
+       <div class="col-sm-6 bg-dark d-flex flex-row-reverse">
+           <div class="btn-group-vertical-right p-3 mt-3 ">
+               <a type="button" class="btn btn-warning" >Connexion</a>
+               <a type="button" class="btn btn-warning" href="{{'/register'}}">Inscription</a>
+           </div>    
+       </div>
+   </div>
+</div>
+
+{% endblock %}
+{% block body %}
+<div class="container-fluid bg-dark ">
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="col-sm-12 text-center  py-5 text-warning bg-dark  ">
+        <h2>Créer votre compte</h2>
+    </div>
+    <div class="container text-warning bg-dark ">
+        {{ form_errors(registrationForm) }}
+            <div class="container p-5 pt-5 bg-dark">
+                {{ form_start(registrationForm) }}
+                <div class="d-flex justify-content-center mb-3 bg-dark">
+                    <div class="row">
+                        <div class="col-sm-12 p-3 "">
+                            <label for="email" class="lemail"> Prénom </label>
+                            {{ form_widget(registrationForm.prenom) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 p-3">
+                            <label for="adresse" class="ladresse"> Nom </label>
+                            {{ form_widget(registrationForm.nom) }}
+                        </div>
+                    </div>
+                </div>
+                    <div class="d-flex justify-content-center mb-3 bg-dark">
+                        <div class="row">
+                            <div class="col-sm-12 p-3 "">
+                                <label for="email" class="lemail"> Mail </label>
+                                {{ form_widget(registrationForm.email) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 p-3">
+                                <label for="adresse" class="ladresse"> Adresse </label>
+                                {{ form_widget(registrationForm.adresse) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3 bg-dark">
+                        <div class="row">
+                            <div class="col-sm-12 p-3">
+                                <label for="telephone" class="letelephone"> Téléphone </label>
+                                {{ form_widget(registrationForm.telephone) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 p-3">
+                                <label for="password" class="lepassword"> Mot de passe </label>
+                                {{ form_widget(registrationForm.plainPassword, {
+                                    label: 'Password'
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3 bg-dark">
+                        <div class="row">
+                            <div class="col-sm-12 p-3"> 
+                                <label for="notif" class="lanotif"> Notification </label>
+                                {{ form_widget(registrationForm.type_notif) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 p-3">
+                                <label for="temrs" class="letermes"> Accepter les conditions </label>
+                                {{ form_widget(registrationForm.agreeTerms) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-warning">Valider</button>
+                    </div>
+            </div>
+        {{ form_end(registrationForm) }}
+        
+            
+    </div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        #logo
+        {
+           width: 100px;
+           height: 100px;
+        }
+    </style>
+
+
+{% endblock %}
+    

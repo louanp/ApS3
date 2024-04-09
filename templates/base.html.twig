@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+       
+        
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <style>
+                #logo
+                {
+                width: 100px;
+                height: 100px;
+                }
+                .body
+                {
+                    backgroundcolors 
+                }
+            </style>
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        {% block header %}
+        {% if app.user and app.user.isVerified==false %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type"button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                <div class="alert-message">
+                    <strong>Veuillez activée votre compte</strong>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 bg-dark">
+                    <a href="{{ path('homepage') }}">
+                    <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                    </div>
+                    <div class="col-sm-6 bg-dark d-flex flex-row-reverse">
+                        <div class="btn-group-vertical-right p-3 mt-3 ">
+                            <a type="button" class="btn btn-warning"href="{{ 'accueil' }}" >Accueil</a>
+                            <a type="button" class="btn btn-warning" href="{{ path('app_logout') }}">Déconnecté</a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% if is_granted('ROLE_USER') %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6 bg-dark">
+                            <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                            </div>
+                            <div class="col-sm-6 bg-dark d-flex flex-row-reverse">
+                                <div class="btn-group-vertical-right p-3 mt-3 ">
+                                    <a type="button" class="btn btn-warning" href="{{'/accueilAdmin'}}" >Administration</a>
+                                    <a type="button" class="btn btn-warning" href="{{ path('app_logout') }}">Déconnecté</a>
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6 bg-dark">
+                        <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                        </div>
+                        <div class="col-sm-6 bg-dark d-flex flex-row-reverse">
+                            <div class="btn-group-vertical-right p-3 mt-3 ">
+
+                                <a type="button" class="btn btn-warning" href="{{ path('app_profil_client', {'id': app.user.id}) }}">Profil</a>
+                                <a type="button" class="btn btn-warning" href="{{ path('app_logout') }}">Déconnecté</a>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+            <div class="container-fluid bg-dark">
+                <div class="row">
+                    <div class="col-sm-6 bg-dark">
+                    <img id="logo" src="{{ asset('images/logo.png') }}" alt="logo"/>
+                    </div>
+                    <div class="col-sm-6 bg-dark d-flex flex-row-reverse">
+                        <div class="btn-group-vertical-right p-3 mt-3 ">
+                            <a type="button" class="btn btn-warning"href="{{'/login'}}">Connexion</a>
+                            <a type="button" class="btn btn-warning" href="{{'/register'}}">Inscription</a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endif %}
+        {% endblock %}
+    </head>
+
+    <body class="bg-dark">
+        {% block body %}
+        {% endblock %}
+        
+        {% block footer %}
+        <div class="container-fluid bg-dark">
+            <div class="row">
+                <div class="col-sm-12 bg-dark text-center py-5 my-5">
+                    <h4 class="text-warning">Ce site a été éditer par Louan Poirier Mathias Pochot et Elio Douas</h4>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+    
+    
+    
+</html>

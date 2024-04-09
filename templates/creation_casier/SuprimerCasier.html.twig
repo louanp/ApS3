@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer casier{% endblock %}
+
+{% block body %}
+<div class="container-fluid bg-dark ">
+    <div class="row">
+        <div class="col-sm-12 bg-dark text-center py-2 ">
+            <h2 class="text-warning">Supression d'un casier</h2>
+        </div>
+    </div>
+    <div class="container text-warning bg-dark ">
+    </div>
+    <div class="row">
+        <div class="col-sm-6 d-flex justify-content-center">
+            <div class="card" style="width:700px">   
+                <div class="card-body">
+                    <table class="table table-striped"> 
+                            <tr><th>Longueur</th><th>Largeur</th><th>hauteur</th><th>id</th><th></tr>  
+                        {% for lecasier in casierExistant %}
+                            <tr>
+                                <td>{{ lecasier.longueur}}</td>
+                                <td>{{ lecasier.largeur }}</td>
+                                <td>{{ lecasier.hauteur}}</td>
+                                <td>{{ lecasier.id}}</td>
+                                <td>
+                                    <form class="d-flex justify-content-center" method="post" >    
+                                        <button type="submit" class="btn btn-warning" name="Supprimer" value="{{lecasier.id}}">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>   
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="card-Footer ">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark ">
+        <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+            <a type="button" class="btn btn-warning" href="{{'/Gestioncasier'}}">Retour </a>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

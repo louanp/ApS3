@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}     
+    {% block title %}Welcome!{% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+            <style>
+                #logo
+                {
+                    width: 100px;
+                    height: 100px;
+                }
+            </style>
+    {% endblock %}
+
+   
+{% block body %}
+        <div class="container bg-dark" >
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <table class="table table-striped">
+                            <thead class="card-header">
+                                <tr>
+                                    <th colspan="2" class="card-title bg-dark text-warning">Activité des centres relais</th>
+                                </tr>
+                            </thead>
+                            <tbody class="card-body">
+                                <tr>
+                                    <th scope="col" class="card-subtitle text-warning">Adresse</th>
+                                    <th scope="col" class="card-subtitle text-warning">Nombre de commande</th>
+                                    <th scope="col" class="card-subtitle text-warning">Nombre de client</th>
+                                    <th scope="col" class="card-subtitle text-warning">Temps moyen de livraison</th>
+                                </tr>
+                                {% for unCentre in lesCentres %}
+                                    <tr>
+                                        <td class"card-text">{{ unCentre.getAdresse() }}</td>
+                                        <td class"card-text">{{ unCentre.getCommandes().count() }}</td>
+                                        <td class"card-text" id="tabClient">{{ unCentre.getLesUser().count() }}</td>
+                                        <td class="card-text">
+                                            {% set totalSeconds = 0 %}
+                                            {% set totalOrders = 0 %}
+
+                                            {% for commande in unCentre.getCommandes() %}
+                                                {% set dateCommande = commande.getDateCommande() %}
+                                                {% set dateEstimationLivraison = commande.getEstimationLivraison() %}
+
+                                                {% set interval = dateCommande.diff(dateEstimationLivraison) %}
+                                                {% set totalSeconds = totalSeconds + interval.s + interval.i * 60 + interval.h * 3600 + interval.d * 86400 %}
+                                                {% set totalOrders = totalOrders + 1 %}
+                                            {% endfor %}
+
+                                            {% if totalOrders > 0 %}
+                                                {% set averageTimeInSeconds = totalSeconds / totalOrders %}
+                                                {% set days = (averageTimeInSeconds / (24 * 3600))|round(0, 'floor') %}
+                                                {% set hours = ((averageTimeInSeconds % (24 * 3600)) / 3600)|round(0, 'floor') %}
+                                                {{ days }} jours, {{ hours }} heures
+                                            {% else %}
+                                                Aucune donnée disponible
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            <tbody>
+                        </table>
+                    </div>
+                <div>
+            </div>
+            <div class="container-fluid bg-dark ">
+                <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+                    <a type="button" class="btn btn-warning" href="{{'/'}}">Retour page accueil</a>
+                </div>
+            </div>            
+        </div>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script>
+
+        const tbody = document.querySelector('tbody');
+        const thx = document.querySelectorAll('th');
+        const trxb = tbody.querySelectorAll('tr');
+
+        const compare = function(ids, asc){
+            return function(row1, row2){
+            const tdValue = function(row, ids){
+                return row.children[ids].textContent;
+            }
+            const tri = function(v1, v2){
+                if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)){
+                    return v1 - v2;//Si v1 et v2 sont des nombres, retourne la différence des deux
+                }
+                else {
+                    return v1.toString().localeCompare(v2);//Compare deux données non int
+                }
+                //En résumé, si v1>v2 -> return <0, si v1<v2 -> return >0, sinon return 0;
+                return v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.localeCompare(v2);
+            };
+            return tri(tdValue(asc ? row1 : row2, ids), tdValue(asc ? row2 : row1, ids));
+            //Si asc -> execute tdValue(row1, ids) et tdValue(row2, ids)
+            //Si desc -> execute tdValue(row2, ids) et tdValue(row1, ids)
+        }
+}
+
+        thx.forEach(th => th.addEventListener('click', () =>{
+            let classe = Array.from(trxb).sort(compare(Array.from(thx).indexOf(th), this.asc = !this.asc));
+            //sort -> fonction de tri qui prend en paramètre une fonction de comparaison.
+            //Array.from(thx).indexOf(th) -> récupère l'indice de la colonne cliqué
+            //this.asc = !this.asc -> défini un booléen qui va s'inverser à chaque clique (pour inverser croissant/décroissant)
+            //classe est donc un tableau trié des éléments d'une colonne du tab html.
+            classe.forEach(tr => tbody.appendChild(tr));//appendChild recrée les lignes du tableau mais cette fois, trié.
+        }));
+    </script>
+{% endblock %}
+
+

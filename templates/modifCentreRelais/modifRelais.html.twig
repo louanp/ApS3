@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire relais{% endblock %}
+
+{% block body %}
+<div class='container-fluid bg-dark'>
+    <div class="row">
+        <div class="col-sm-6 d-flex justify-content-center">
+            <div class="card" style="width:700px">   
+                <div class="card-body">
+                    <table class="table table-striped"> 
+                            <tr><th>Ville</th><th>Adresse</th><th>Capacite</th><th>id</th><th></tr>  
+                        {% for lerelais in lesCentreRelais %}
+                            <tr>
+                                <td>{{ lerelais.ville }}</td>
+                                <td>{{ lerelais.adresse }}</td>
+                                <td>{{ lerelais.capacite}}</td>
+                                <td>{{ lerelais.id}}</td>
+                                <td>
+                                    <form class="d-flex justify-content-center" method="post" >
+                                        <div class="btn-group mr-2">
+                                            <input type="hidden" name="idRelais" value="{{lerelais.id}}" >
+                                            <button type="submit" class="btn btn-warning" name="Modifier" value="modifier" >Modifier</button>
+                                            <button type="submit" class="btn btn-warning" name="Supprimer">Supprimer</button>
+                                        </div>  
+                                    </form>
+                                </td>
+                            </tr>   
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="card-Footer ">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 d-flex justify-content-center">
+            <div class="card" style="width:400px"> 
+                <h4 class="card-title">Ajouter un centre Relais</h4>
+                <div class="card-body">
+                    {{ form_start(CentreRelaisType) }} 
+                    <div class="d-flex justify-content-center ">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label for="Ville" class="laville" > Ville </label>
+                                {{ form_widget(CentreRelaisType.Ville) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label for="Adresse" class="ladresse"> Adresse </label>
+                                {{ form_widget(CentreRelaisType.Adresse) }}
+                            </div>
+                        </div>
+                    </div>
+                        <div class="d-flex justify-content-center ">
+                            <div class="row">
+                                <div class="col-sm >
+                                    <label for="Capacite" class="lacapacite" > Capacite </label>
+                                    {{ form_widget(CentreRelaisType.Capacite) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label for="Pays" class="lepays" > Pays </label>
+                                    {{ form_widget(CentreRelaisType.Pays) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="card-Footer ">
+                    <div class="row">
+                        <div class="col-sm pb-1 d-flex justify-content-center  ">
+                            {%if idrelais is defined%}
+                                <input type="hidden" name="idRelais" value="{{idrelais}}" >
+                            {%endif%}
+                            {% if state == 'ajouter'%}
+                            <button type="submit" name= "state" class="btn btn-warning" value="ajouter">Valider</button>
+                            {%elseif state == 'modifier'%}
+                            <div class="btn-group-vertical-right p-3 mt-3 ">
+                                <button type="submit" name= "state" class="btn btn-warning" value="modifier">Valider</button>
+                            </div>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(CentreRelaisType) }}
+            </div>
+        </div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <a type="button" class="btn btn-warning" href="{{'/Gestioncasier'}}" >Gérer les casiers </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

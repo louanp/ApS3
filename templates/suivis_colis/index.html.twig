@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page suivis colis{% endblock %}
+{% block header %}
+{% endblock %}
+
+{% block body %}
+{%if lacommande.getId() == null%}
+    <div class="col-sm-12 text-center  py-5 text-warning bg-dark  ">
+        <h1>La commande n'existe pas </h1>
+    </div>
+{%endif%}
+{% if lacommande.getEtat() == 1  %}
+    <div class="container-fluid bg-dark">
+        <div class="col-sm-12 text-center  py-5 text-warning bg-dark  ">
+            <h2>Suivis de votre colis</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="progress" style="width:100%">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:25%">
+                       Commande en préparation
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 text-center my-5 ">
+                <img id="img" src="{{ asset('images/preparation.jpg') }}" alt="preparation"/>
+                <h4 class="text-warning">Préparation du colis</h4>
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/envoye.png') }}" alt="Envoye"/>
+                <h4 class="text-warning">Colis envoyé</h4>
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/livraison.png') }}" alt="livraison"/>
+                <h4 class="text-warning">En cours de livraison</h4>
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/arriver.png') }}" alt="arrive"/>
+                <h4 class="text-warning">Disponible au point relais</h4>
+            </div>
+        </div>
+    </div>  
+{% endif %}
+{% if lacommande.getEtat() == 2  %}
+    <div class="container-fluid bg-dark">
+        <div class="col-sm-12 text-center py-5 text-warning bg-dark  ">
+            <h2 class="text-warning">Suivis de votre colis</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <div class="progress" style="width:100%">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                        Commande Envoyé
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 text-center my-5 ">
+                <img id="img" src="{{ asset('images/preparation.jpg') }}" alt="preparation"/>
+                <h4 class="text-warning">Préparation du colis</h4>
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/envoye.png') }}" alt="Envoye"/>
+                <h4 class="text-warning">Colis envoyé</h4>
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/livraison.png') }}" alt="livraison"/>
+                <h4 class="text-warning">En cours de livraison</h4>
+
+            </div>
+            <div class="col-sm-3 text-center my-5">
+                <img id="img" src="{{ asset('images/arriver.png') }}" alt="arrive"/>
+                <h4 class="text-warning">Disponible au point relais</h4>
+            </div>
+        </div>
+    </div>  
+{% endif %}
+{% if lacommande.getEtat() == 3  %}
+<div class="container-fluid bg-dark">
+    <div class="col-sm-12 text-center py-5 text-warning bg-dark  ">
+        <h2>Suivis de votre colis</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="progress" style="width:100%">
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:75%">
+                    Commande en cours de livraison
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 text-center my-5 ">
+            <img id="img" src="{{ asset('images/preparation.jpg') }}" alt="preparation"/>
+            <h4 class="text-warning">Préparation du colis</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/envoye.png') }}" alt="Envoye"/>
+            <h4 class="text-warning">Colis envoyé</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/livraison.png') }}" alt="livraison"/>
+            <h4 class="text-warning">En cours de livraison</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/arriver.png') }}" alt="arrive"/>
+            <h4 class="text-warning">Disponible au point relais</h4>
+        </div>
+    </div>
+</div>  
+{% endif %}
+{% if lacommande.getEtat() == 4  %}
+<div class="container-fluid bg-dark">
+    <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+        <h2>Suivis de votre colis</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="progress" style="width:100%">
+                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                    Commande en point relais
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 text-center my-5 ">
+            <img id="img" src="{{ asset('images/preparation.jpg') }}" alt="preparation"/>
+            <h4 class="text-warning">Préparation du colis</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/envoye.png') }}" alt="Envoye"/>
+            <h4 class="text-warning">Colis envoyé</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/livraison.png') }}" alt="livraison"/>
+            <h4 class="text-warning">En cours de livraison</h4>
+        </div>
+        <div class="col-sm-3 text-center my-5">
+            <img id="img" src="{{ asset('images/arriver.png') }}" alt="arrive"/>
+            <h4 class="text-warning">Disponible au point relais</h4>
+        </div>
+    </div>
+</div>  
+{% endif %}
+<div class="container-fluid bg-dark ">
+    <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+        <a type="button" class="btn btn-warning" href="{{'/'}}">Retour page accueil</a>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        #logo
+        {
+           width: 100px;
+           height: 100px;
+        }
+        #img
+        {
+            width: 100px;
+            height: 100px;
+            border-radius : 100px;
+        }
+
+    </style>
+
+
+{% endblock %}

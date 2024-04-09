@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4 bg-dark">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-warning">Profil de l'utilisateur</h1>
+                    </div>
+                    <div class="card-body ">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom :</label>
+                            <span id="nom" class="form-control">{{ user.nom ?? '' }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Prenom :</label>
+                            <span id="nom" class="form-control">{{ user.prenom ?? '' }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Email :</label>
+                            <span id="nom" class="form-control">{{ user.email ?? '' }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Adresse :</label>
+                            <span id="nom" class="form-control">{{ user.adresse ?? '' }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Télephone :</label>
+                            <span id="nom" class="form-control">{{ user.telephone ?? '' }}</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type de notification :</label>
+                            <span class="form-control">
+                                {% if user.typeNotif == "telephone" %}
+                                    Téléphone
+                                {% elseif user.typeNotif == "email" %}
+                                    Email
+                                {% else %}
+                                    Les deux
+                                {% endif %}
+                            </span>
+                        </div>
+                        <a href="{{ path('app_profil_client_modif', {'id': user.id}) }}" class="btn btn-secondary">Modifier</a>
+                    </div> 
+                </div>
+            </div>
+        <div class="col-md-4 bg-dark">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-warning">Historique des commandes</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Commande</th>
+                                    <th>Date</th>
+                                    <th>Poids</th>
+                                    <th>Retours</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for commande in user.commandes %}
+                                    <tr>
+                                        <td>{{ commande.id }}</td>
+                                        <td>{{ commande.dateCommande|date('Y-m-d') }}</td>
+                                        <td>{{ commande.poid }}</td>   
+                                        <td><a href="{{ path('app_retours', {'id': commande.id}) }}" class="btn btn-secondary">Retourner</a></td>
+                                 
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid bg-dark py-5 ">
+        <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+            <a type="button" class="btn btn-warning" href="{{'/'}}">Retour page accueil</a>
+        </div>
+    </div>
+    </div>
+{% endblock %}

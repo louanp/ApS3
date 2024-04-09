@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page suivis colis{% endblock %}
+{% block body %}
+    <div class="col-sm-12 text-center py-5 text-warning bg-dark  ">
+        <h1 class="text-warning">La commande n'existe pas </h1>
+    </div>
+    <div class="container-fluid bg-dark py-5 ">
+        <div class="col-sm-12 text-center py-5 text-warning bg-dark ">
+            <a type="button" class="btn btn-warning" href="{{'/'}}">Retour page accueil</a>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        #logo
+        {
+           width: 100px;
+           height: 100px;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page accueil Admin {% endblock %}
+
+{% block body %}
+    <div class='container-fluid bg-dark '>
+        <div class="row">
+            <div class="col-sm-4 my-4 d-flex justify-content-center">
+                <div class="card" style="width:400px">   
+                    <div class="card-body">
+                        <table class="table table-striped"> 
+                                <tr><th>Ville</th><th>Adresse</th><th>Capacite</th></tr> 
+                            {% for lerelais in lesCentreRelais %}
+                                <tr><td>{{ lerelais.ville }}</td><td>{{ lerelais.adresse }}</td><td>{{ lerelais.capacite}}</td></tr>   
+                                
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="card-Footer ">
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center">
+                                <h4 class="card-title">Liste des Centres</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center">
+                                <p class="card-text">Modifier un centre relais</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center  ">
+                                <a type="button" class="btn btn-warning justify-content-center"href="{{'/modifCentreRelais'}}">Modifier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 my-4 d-flex justify-content-center ">
+                <div class="card" style="width:400px">   
+                    <div class="card-body">
+                        <table class="table table-striped"> 
+                                <tr><th>id</th><th>adresse</th><th>TypeNotif</th></tr> 
+                            {% for leclient in lesclient %}
+                                <tr>
+                                    <td>{{ leclient.id }}</td>
+                                    <td>{{ leclient.adresse }}</td>
+                                    <td>{{ leclient.typenotif}}</td>
+                                </tr>   
+                                
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="card-Footer ">
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center">
+                                <h4 class="card-title">Liste des Clients</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center">
+                                <p class="card-text">Voir le détail </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center  ">
+                                <a type="button" class="btn btn-warning justify-content-center"href="{{'/info_client'}}">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 my-4 d-flex justify-content-center ">
+                <div class="card" style="width:400px">   
+                    <div class="card-body">
+                        <table class="table table-striped">
+                                <tr><th>Ville</th><th>Taux de casier utilisé % </th><th>Total des commandes</th></tr>                                 
+                            {% for lecentre in lesCentreRelais %}
+                                <tr>
+                                    <td>{{ lecentre.ville }}</td>
+                                    <td>{{ lecentre.getpourcentage()}}</td>
+                                    <td>{{ lecentre.getTotalcommande()}}</td>
+                                </tr>   
+                                
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="card-Footer ">
+                        <div class="row">
+                            <div class="col-sm pb-1 d-flex justify-content-center  ">
+                                <a type="button" class="btn btn-warning justify-content-center"href="{{'/rapport'}}">Voir plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        #logo
+        {
+           width: 100px;
+           height: 100px;
+        }
+    </style>
+{% endblock %}

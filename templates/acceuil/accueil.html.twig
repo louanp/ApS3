@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page accueil{% endblock %}
+
+{% block body %}
+<div id="un" class="container-fluid bg-dark ">
+    <div class="row bg-dark">
+        <div class="col-sm-12 my-1  d-flex justify-content-center"> 
+            <img id="libellul" src="{{ asset('images/libellul.jpg') }}" alt="libellul"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm p-3"  >
+            <form class="d-flex justify-content-center" method="post" >
+                <input id="numcommandebar" name="numcommande" class="form-control  ms-5 mt-5" type="text" placeholder="Numéros de commande">
+                <button type="submit" class="btn btn-warning  ms-5 mt-5" >chercher</button>
+            </form>
+        </div>
+        <div class="col-sm p-3 bg-dark d-flex justify-content-center" >
+                {% if is_granted('ROLE_USER') %}
+                    <div class="btn-group-vertical my-3 p-2">
+                        <a type="button" class="btn btn-warning my-2">Trouver un relais </a>
+                        <a type="button" class="btn btn-warning my-2" href="{{'/createCommande'}}">Envoyer un colis</a>
+                        <a type="button" class="btn btn-warning my-2">Obtenir un devis </a>
+                    </div>
+                {% else %}
+                    <div class="btn-group-vertical my-3 p-2">
+                        <a type="button" class="btn btn-warning my-2">Trouver un relais </a>
+                        <a type="button" class="btn btn-warning my-2" href="{{'/login'}}">Envoyer un colis </a>
+                        <a type="button" class="btn btn-warning my-2">Obtenir un devis </a>
+                    </div>
+                {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <style>
+        #logo
+        {
+           width: 100px;
+           height: 100px;
+        }
+        #numcommandebar
+        {
+            width: 500px;
+           height: 50px;
+        }
+        #libellul
+        {
+            width : 1000px;
+            height : 450px;
+        }
+    </style>
+
+
+{% endblock %}
